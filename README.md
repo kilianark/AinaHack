@@ -1,3 +1,1 @@
 # AinaHack
-
-Vamos a morir
