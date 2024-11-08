@@ -1,0 +1,1 @@
+def simplify(translated_text)
