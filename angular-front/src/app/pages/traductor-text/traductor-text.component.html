@@ -1,16 +1,33 @@
 <form [formGroup]="traductorForm" (ngSubmit)="guardar()">
-    <mat-form-field appearance="fill">
-        <mat-label>Text</mat-label>
-        <input matInput formControlName="text" maxlength="500" />
-        <div *ngIf="traductorForm.get('text')?.value?.length !== undefined">
-            <small>{{ 500 - traductorForm.get('text')?.value.length }} caràcters restants</small>
+    <div class="translator-container">
+        <!-- Selector de idioma -->
+        <div class="language-selector">
+            <select formControlName="sourceLanguage">
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
+                <option value="cat">Català</option>
+            </select>
+            <span class="swap-icon">⇄</span>
+            <select formControlName="targetLanguage">
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
+                <option value="cat">Català</option>
+            </select>
         </div>
-    </mat-form-field>
-    <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Tradueix</button>
+
+        <!-- Campos de entrada y salida -->
+        <div class="translation-panel">
+            <div class="input-container">
+                <textarea formControlName="text" maxlength="500" placeholder="Introduzca texto aquí..."></textarea>
+                <small>{{ 500 - traductorForm.get('text')?.value.length || 500 }} caracteres restantes</small>
+            </div>
+
+            <div style="border: 1px solid #ccc; padding: 10px; width: 40%; height: 100px; overflow-y: auto;">
+                <p>{{ translatedText || 'Traducción' }}</p>
+            </div>
+        </div>
+
+        <!-- Botón de traducir -->
+        <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Traducir</button>
+    </div>
 </form>
-
-
-<div *ngIf="submittedText">
-    <h3>Contingut traduït:</h3>
-    <p>{{ submittedText }}</p>  
-</div>
