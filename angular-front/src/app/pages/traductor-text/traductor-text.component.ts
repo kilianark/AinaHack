@@ -17,17 +17,21 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class TraductorTextComponent {
   traductorForm: FormGroup;
-  submittedText: string | null = null;
+  translatedText: string | null = null;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder) {
     this.traductorForm = this.fb.group({
-      text:['', [Validators.required]]
+      sourceLanguage: ['es'], // Idioma de origen
+      targetLanguage: ['cat'], // Idioma de destino
+      text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
     });
   }
 
-  guardar(): void {
+  guardar() {
     if (this.traductorForm.valid) {
-      this.submittedText = this.traductorForm.get('text')?.value;
+      const textToTranslate = this.traductorForm.get('text')?.value;
+      // Lógica de traducción. Para este ejemplo, mostramos el mismo texto.
+      this.translatedText = textToTranslate;
     }
   }
 
