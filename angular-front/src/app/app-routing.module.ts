@@ -1,22 +1,18 @@
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
-import { HomeModule } from "./module/home/home.module";
+import { TraductorTextComponent } from "./pages/traductor-text/traductor-text.component";
 
 export const routes: Routes = [
-    {
-        path: 'home',
-        loadChildren: () =>
-            import('./module/home/home.module').then((m) => m.HomeModule),
-    },
-    {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: '**', redirectTo: '/home', pathMatch: 'full'},
+    {path: 'translate_text', component: TraductorTextComponent},
+    {path: '', redirectTo: '/translate_text', pathMatch: 'full'},
+    {path: '**', redirectTo: '/translate_text', pathMatch: 'full'},
 ];
 
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        HomeModule
+        TraductorTextComponent
     ],
     exports: [
         RouterModule
