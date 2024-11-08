@@ -4,20 +4,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateService } from '../../services/translate/translate.service';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-traductor-doc',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  providers: [provideHttpClient()],
   templateUrl: './traductor-doc.component.html',
   styleUrl: './traductor-doc.component.css'
 })

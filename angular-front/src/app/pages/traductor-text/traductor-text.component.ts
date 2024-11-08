@@ -6,12 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-traductor-text',
-  standalone: true,
-  imports: [CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule],
   templateUrl: './traductor-text.component.html',
   styleUrl: './traductor-text.component.css'
 })
