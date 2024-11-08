@@ -1,5 +1,8 @@
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 import { TraductorTextComponent } from "./pages/traductor-text/traductor-text.component";
 
@@ -12,7 +15,9 @@ export const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        TraductorTextComponent
+        TraductorTextComponent,
+        MatInputModule,
+        MatFormFieldModule
     ],
     exports: [
         RouterModule

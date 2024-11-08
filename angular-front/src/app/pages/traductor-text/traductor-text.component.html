@@ -1,1 +1,7 @@
-<p>traductor-text works!</p>
+<mat-form-field appearance="fill">
+    <mat-label>Texto</mat-label>
+    <input matInput [(ngModel)]="text" maxlength="100" />
+    <div *ngIf="text?.length !== undefined">
+      <small>{{ 100 - text.length }} caracteres restantes</small>
+    </div>
+  </mat-form-field>
