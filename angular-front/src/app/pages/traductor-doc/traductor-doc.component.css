@@ -1,0 +1,21 @@
+mat-form-field {
+    width: 100%; /* Hace que el campo ocupe todo el ancho disponible */
+    margin-bottom: 10px; /* Espacio debajo del campo de entrada */
+  }
+  
+  mat-label {
+    color: white; /* Cambia el color de la etiqueta a blanco */
+  }
+  
+  input {
+    background-color: #f3f3f3; /* Color de fondo para el input */
+    padding: 10px; /* Espaciado dentro del campo de entrada */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  small {
+    color: #757575; /* Color gris para el texto pequeño */
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    display: block; /* Hace que el texto pequeño ocupe una nueva línea */
+    margin-top: 5px; /* Espacio por encima del texto pequeño */
+  }

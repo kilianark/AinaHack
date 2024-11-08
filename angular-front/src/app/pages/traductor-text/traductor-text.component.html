@@ -1,7 +1,16 @@
-<mat-form-field appearance="fill">
-    <mat-label>Texto</mat-label>
-    <input matInput [(ngModel)]="text" maxlength="100" />
-    <div *ngIf="text?.length !== undefined">
-      <small>{{ 100 - text.length }} caracteres restantes</small>
-    </div>
-  </mat-form-field>
+<form [formGroup]="traductorForm" (ngSubmit)="guardar()">
+    <mat-form-field appearance="fill">
+        <mat-label>Text</mat-label>
+        <input matInput formControlName="text" maxlength="500" />
+        <div *ngIf="traductorForm.get('text')?.value?.length !== undefined">
+            <small>{{ 500 - traductorForm.get('text')?.value.length }} caràcters restants</small>
+        </div>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Tradueix</button>
+</form>
+
+
+<div *ngIf="submittedText">
+    <h3>Contingut traduït:</h3>
+    <p>{{ submittedText }}</p>  
+</div>

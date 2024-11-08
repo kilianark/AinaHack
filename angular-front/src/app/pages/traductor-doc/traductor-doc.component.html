@@ -1,1 +1,16 @@
-<p>traductor-doc works!</p>
+<form [formGroup]="traductorForm" (ngSubmit)="guardar()">
+    <mat-form-field appearance="fill">
+        <mat-label>Text</mat-label>
+        <input matInput formControlName="text" maxlength="500" />
+        <div *ngIf="traductorForm.get('text')?.value?.length !== undefined">
+            <small>{{ 500 - traductorForm.get('text')?.value.length }} caràcters restants</small>
+        </div>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Tradueix</button>
+</form>
+
+
+<div *ngIf="submittedText">
+    <h3>Contingut traduït:</h3>
+    <p>{{ submittedText }}</p>  
+</div>
