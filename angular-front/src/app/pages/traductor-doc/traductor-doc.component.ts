@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { extractTextFromPDF } from '../../pdf-reader.util';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-traductor-doc',
@@ -11,23 +13,36 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule ],
   templateUrl: './traductor-doc.component.html',
   styleUrl: './traductor-doc.component.css'
 })
 export class TraductorDocComponent {
   traductorForm: FormGroup;
-  submittedText: string | null = null;
+  translatedText: string | null = null;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder) {
     this.traductorForm = this.fb.group({
-      text:['', [Validators.required]]
+      sourceLanguage: ['es'], // Idioma de origen
+      targetLanguage: ['cat'], // Idioma de destino
+      text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
     });
   }
 
-  guardar(): void {
+  guardar() {
     if (this.traductorForm.valid) {
-      this.submittedText = this.traductorForm.get('text')?.value;
+      const textToTranslate = this.traductorForm.get('text')?.value;
+      // Lógica de traducción. Para este ejemplo, mostramos el mismo texto.
+      this.translatedText = textToTranslate;
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      extractTextFromPDF(file).then(text => {
+        console.log(text); // Aquí puedes mostrar el texto extraído
+      });
     }
   }
 }

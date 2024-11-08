@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { TraductorTextComponent } from "./pages/traductor-text/traductor-text.component";
 import { TraductorDocComponent } from "./pages/traductor-doc/traductor-doc.component";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 export const routes: Routes = [
     {path: 'translate_text', component: TraductorTextComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
         TraductorTextComponent,
         MatInputModule,
         MatFormFieldModule
+        
     ],
     exports: [
         RouterModule
