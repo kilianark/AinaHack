@@ -14,7 +14,7 @@ export const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        TranslateModule  // Asegúrate de que el módulo TranslateModule esté importado correctamente
+        TranslateModule
     ],
     exports: [
         RouterModule
