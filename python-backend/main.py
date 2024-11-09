@@ -1,5 +1,5 @@
 from salamandra import translate_text
-from simplify import simplify
+from resumeSal import resumeSalamandra
 def main():
     # Example sentence to translate
 
@@ -8,7 +8,7 @@ def main():
     src_lang_code = 'Spanish'
     tgt_lang_code = 'English'
     
-    resumed = simplify(sentence)
+    resumed = resumeSal(sentence)
     print(resumed)
     
     src_lang_code = 'English'
