@@ -6,13 +6,13 @@ model_name = "BSC-LT/salamandra-7b-instruct-aina-hack"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-def resumeSalamandra(text):
+def simplifySalamander(text):
     headers = {
         "Accept" : "application/json",
         "Authorization": f"Bearer {HF_TOKEN}",
         "Content-Type": "application/json"
     }
-    system_prompt = "Detecta els punts claus del text, fes una descripció concisa, breu i ordenada dels punts clau"
+    system_prompt = "Detecta la terminologia especialitzada, escriu el text de nou adaptant-ho a una terminologia col·loquial sense resumir-ho"
     message = [ { "role": "system", "content": system_prompt} ]
     message += [ { "role": "user", "content": text } ]
     prompt = tokenizer.apply_chat_template(
@@ -28,3 +28,4 @@ def resumeSalamandra(text):
     api_url = BASE_URL + "/generate"
     response = requests.post(api_url, headers=headers, json=payload)
     return response
+    
