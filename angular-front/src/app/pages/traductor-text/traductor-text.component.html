@@ -99,9 +99,12 @@
 </svg>
 <div class="modal" *ngIf="modalVisible">
   <div class="modal-content">
+    <div class="output">
+      <p>{{ submitText() }}</p>
+    </div>
     <span class="close" (click)="closeWindow()">&times;</span>
-    <h2>Enter Text</h2>
     <textarea [(ngModel)]="inputText" placeholder="Type something..."></textarea>
     <button (click)="submitText()">Submit</button>
   </div>
+
 </div>

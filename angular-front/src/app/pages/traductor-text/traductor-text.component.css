@@ -169,6 +169,7 @@ div[style*="border: 1px solid"] {
 
 /* Modal content */
 .modal-content {
+  height: 80%;
   background-color: white;
   margin: 15% auto;
   padding: 20px;
@@ -177,6 +178,15 @@ div[style*="border: 1px solid"] {
   border-radius: 10px;
   text-align: center;
   position: relative;
+}
+/* Style the output text */
+.output {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 /* Close button (X) */
