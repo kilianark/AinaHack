@@ -61,11 +61,11 @@
       </div>
 
       <div class="output-container">
-        <p>{{ translatedText }}</p>
+        <p style="margin-top: 0px;">{{ translatedText }}</p>
       </div>
     </div>
     <div class="generatePDF">
-      <button (click)="generatePDF()">Generar PDF de la traducció</button>
+      <button (click)="generatePDF()" [disabled]="!haveContentForPDF">Generar PDF de la traducció</button>
     </div>
   </div>
 </form>

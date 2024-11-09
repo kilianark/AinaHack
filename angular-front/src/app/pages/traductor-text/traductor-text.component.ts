@@ -25,6 +25,8 @@ export class TraductorTextComponent {
   tgtLangCode = 'Catalan';
   fun = 'Traduir';
 
+  haveContentForPDF = false;
+
   constructor(
     private fb: FormBuilder,
     private translateService: TranslateService,
@@ -83,6 +85,7 @@ export class TraductorTextComponent {
             console.log(response);
           });
       }
+      this.haveContentForPDF = true; 
     }
   }
 
