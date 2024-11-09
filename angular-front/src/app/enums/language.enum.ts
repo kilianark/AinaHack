@@ -1,5 +1,11 @@
 export enum language {
     Spanish = 'Castellà',
     Catalan = 'Català',
-    English = 'Anglès'
+    Galician = 'Gallec',
+    Euskera = 'Euskera',
+    Aragonese = 'Aragonés',
+    Portuguese = 'Portugués',
+    English = 'Anglès',
+    French = 'Francès',
+    Deutsch = 'Alemà'
 }
