@@ -27,4 +27,5 @@ def simplifySalamander(text):
     }
     api_url = BASE_URL + "/generate"
     response = requests.post(api_url, headers=headers, json=payload)
-    print(response.json())
+    return response
+    
