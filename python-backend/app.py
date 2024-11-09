@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify  # Importar módulos necesarios
 from flask_cors import CORS
 from salamandra import translate_text
+from salamandra import simplifyText
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route("/translate", methods=["POST"])
-def translate():
+def translateTextApi():
     
     #obtener datos de la solicitud JSON
     data = request.json
@@ -20,7 +21,7 @@ def translate():
     return jsonify(translated_text)
 
 @app.route("/simplify", methods=["POST"])
-def simplify():
+def simplifyTextApi():
     #obtener datos de la solicitud JSON
     data = request.json
     src_lang_code = data.get("src_lang_code")
@@ -28,7 +29,7 @@ def simplify():
     sentence = data.get("sentence")
     
     #llamar al simplify de salamandra
-    simplified_text = simplify(src_lang_code, tgt_lang_code, sentence)
+    simplified_text = simplifyText(src_lang_code, tgt_lang_code, sentence)
     
     return jsonify(simplified_text)
     
