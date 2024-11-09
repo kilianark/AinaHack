@@ -12,7 +12,7 @@ def resumeSalamandra(text):
         "Authorization": f"Bearer {HF_TOKEN}",
         "Content-Type": "application/json"
     }
-    system_prompt = "Detecta els punts claus del text, fes una descripció amplia, clara i ordenada dels punts clau"
+    system_prompt = "Detecta els punts claus del text, resumeix el text ordenat pels punts claus"
     message = [ { "role": "system", "content": system_prompt} ]
     message += [ { "role": "user", "content": text } ]
     prompt = tokenizer.apply_chat_template(
@@ -28,6 +28,4 @@ def resumeSalamandra(text):
     }
     api_url = BASE_URL + "/generate"
     response = requests.post(api_url, headers=headers, json=payload)
-
-    respuesta= response.json()
-    return respuesta["generated_text"]
+    return response.json()
