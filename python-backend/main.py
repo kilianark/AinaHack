@@ -9,6 +9,7 @@ def main():
     tgt_lang_code = 'English'
     
     resumed = simplify(sentence)
+    print(resumed)
     
     src_lang_code = 'English'
     tgt_lang_code = 'Catalan'
