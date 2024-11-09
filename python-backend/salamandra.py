@@ -23,7 +23,7 @@ def translate_text(src_lang_code, tgt_lang_code, sentence):
     payload = {
         "inputs": prompt,
         "parameters": {
-            "new_max_tokens": 80000  # Add max_tokens to the parameters
+            "max_new_tokens": 4000  # Add max_tokens to the parameters
         }
     }
     
