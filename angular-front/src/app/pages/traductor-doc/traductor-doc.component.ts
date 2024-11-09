@@ -22,6 +22,9 @@ export class TraductorDocComponent {
   srcLangCode = 'Spanish';
   tgtLangCode = 'Catalan';
   fun = 'Traduir';
+  model = "Salamandra";
+  funSimplify=false;
+  funResume=false;
 
   havePDF = false;
   haveContentForPDF = false;
@@ -36,6 +39,7 @@ export class TraductorDocComponent {
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
       functionality: [functions.Translate],
+      model: [this.model]
     });
   }
 
@@ -60,27 +64,57 @@ export class TraductorDocComponent {
               console.log(response);
             });
       } else if (this.fun === 'Simplificar') {
-        this.translateService
-            .simplifyText(
+        if (this.model === 'Salamandra') {
+          console.log("doing simplifyTextSalamandra")
+          this.translateService
+          .simplifyTextSalamandra(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+        } else if (this.model === 'T5') {
+          console.log("doing simplifyText")
+          this.translateService
+          .simplifyText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+        }
+      } else if (this.fun === 'Resumir') {
+        if (this.model === 'Salamandra') {
+          console.log("doing resumeTextSalamandra")
+          this.translateService
+            .resumeTextSalamandra(
               this.srcLangCode,
               this.tgtLangCode,
-              this.setencePdf
+              this.traductorForm.get('text')?.value
             )
             .subscribe((response) => {
               this.translatedText = response;
               console.log(response);
             });
-      } else if (this.fun === 'Resumir') {
-        this.translateService
+        } else if (this.model === 'Brat') {
+          console.log("doing resumeText")
+          this.translateService
             .resumeText(
               this.srcLangCode,
               this.tgtLangCode,
-              this.setencePdf
+              this.traductorForm.get('text')?.value
             )
             .subscribe((response) => {
               this.translatedText = response;
               console.log(response);
             });
+        }
       }
       this.haveContentForPDF = true;
     });
@@ -117,6 +151,13 @@ export class TraductorDocComponent {
     console.log('nuevo valor seleccionado src: ', this.srcLangCode);
   }
 
+  onModChange(){
+    const tmp = this.traductorForm.get('model')?.value;
+    console.log("model: ", tmp)
+    this.model = tmp;
+    console.log("model assig: ", this.model)
+  }
+
   onTgtLanguageChange() {
     const tmp = this.traductorForm.get('targetLanguage')?.value;
     if (tmp === 'Castellà') {
@@ -142,7 +183,14 @@ export class TraductorDocComponent {
   }
 
   onFunChange() {
+    this.funSimplify = false;
+    this.funResume = false;
     const tmp = this.traductorForm.get('functionality')?.value;
+    if (tmp === 'Simplificar') {
+      this.funSimplify = true;
+    } else if (tmp === 'Resumir') {
+      this.funResume = true;
+    }
     this.fun = tmp;
     console.log(tmp);
   }
