@@ -124,7 +124,7 @@ En aquest projecte, hem utilitzat diversos models d'intel·ligència artificial 
 
 ## 1. **Salamandra (Model de Traducció Automàtica i Simplificació)**
 
-- **Lloc d'ús**: Traducció de textos
+- **Lloc d'ús**: Traducció, simplificació i resum de textos
 - **Descripció**: El model Salamandra és una eina desenvolupada per facilitar la traducció de textos, així com la seva simplificació i resum. Aquest model es basa en l'ús de diversos models de transformadors, incloent MarianMT per a la traducció i altres components per a la simplificació i el resum de textos.
 - **Funció al projecte**: El model Salamandra es fa servir per traduir textos entre diferents idiomes, simplificar textos complexos i generar resums. Les funcionalitats inclouen traduir textos entre diversos idiomes, simplificar-los a un llenguatge més clar i concís, i resumir textos llargs per fer-los més fàcils d’entendre.
 - **On s'utilitza**: 
@@ -132,6 +132,21 @@ En aquest projecte, hem utilitzat diversos models d'intel·ligència artificial 
   - També es fa servir en la funció `simplifyText` per traduir el text a l'anglès, simplificar-lo i traduir-lo novament a l'idioma original.
   - A la funció `resumeText`, que primer tradueix el text a l'espanyol, el resumeix i després el torna a traduir a l'idioma de destí.
 
+  ``python
+
+      from transformers import T5ForConditionalGeneration, T5Tokenizer
+    
+      # Carreguem el model T5 per a simplificació
+      model = T5ForConditionalGeneration.from_pretrained('t5-base')
+      tokenizer = T5Tokenizer.from_pretrained('t5-base')
+      
+      def simplify_text(text):
+          inputs = tokenizer.encode("simplify: " + text, return_tensors="pt")
+          outputs = model.generate(inputs)
+          simplified_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+          return simplified_text
+
+  ```
 ## 2. **T5 (Text-to-Text Transfer Transformer)**
 
 - **Lloc d'ús**: Simplificació de textos
