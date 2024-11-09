@@ -70,7 +70,7 @@ export class TraductorDocComponent {
           .simplifyTextSalamandra(
             this.srcLangCode,
             this.tgtLangCode,
-            this.traductorForm.get('text')?.value
+            this.setencePdf
           )
           .subscribe((response) => {
             this.translatedText = response;
@@ -82,7 +82,7 @@ export class TraductorDocComponent {
           .simplifyText(
             this.srcLangCode,
             this.tgtLangCode,
-            this.traductorForm.get('text')?.value
+            this.setencePdf
           )
           .subscribe((response) => {
             this.translatedText = response;
@@ -96,7 +96,7 @@ export class TraductorDocComponent {
             .resumeTextSalamandra(
               this.srcLangCode,
               this.tgtLangCode,
-              this.traductorForm.get('text')?.value
+              this.setencePdf
             )
             .subscribe((response) => {
               this.translatedText = response;
@@ -108,7 +108,7 @@ export class TraductorDocComponent {
             .resumeText(
               this.srcLangCode,
               this.tgtLangCode,
-              this.traductorForm.get('text')?.value
+              this.setencePdf
             )
             .subscribe((response) => {
               this.translatedText = response;
