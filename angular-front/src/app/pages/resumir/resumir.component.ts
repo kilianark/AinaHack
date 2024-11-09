@@ -9,7 +9,7 @@ import { TranslateService } from '../../services/translate/translate.service';
 })
 export class ResumirComponent {
   traductorForm: FormGroup;
-  translatedText: string | null = null;
+  resumedText: string | null = null;
 
   constructor(private fb: FormBuilder, private translateService: TranslateService){ 
     this.traductorForm = this.fb.group({
@@ -22,8 +22,8 @@ export class ResumirComponent {
   guardar() {
     if (this.traductorForm.valid) {
       console.log("pre-translateService")
-      this.translateService.translateText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
-        this.translatedText = response
+      this.translateService.resumeText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
+        this.resumedText = response
         console.log(response)
       });
     }
