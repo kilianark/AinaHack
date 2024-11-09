@@ -34,6 +34,7 @@ export class TraductorTextComponent {
 
   guardar() {
     if (this.traductorForm.valid) {
+      this.translatedText = "Traduciendo...";
       console.log('srcLang', this.srcLangCode);
       console.log('tgtLang', this.tgtLangCode);
       this.translateService
@@ -45,6 +46,11 @@ export class TraductorTextComponent {
         .subscribe((response) => {
           this.translatedText = response;
           console.log(response);
+        },
+        (error) => {
+          // En caso de error, puedes actualizar con un mensaje de error
+          this.translatedText = "Hubo un error en la traducción.";
+          console.error("Error en la traducción", error);
         });
     }
   }

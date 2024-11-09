@@ -88,6 +88,7 @@ div[style*="border: 1px solid"] {
 
 .translator-container {
   width: 100%;
+  height: 100%;
 }
 .input-container {
   width: 50%; /* Ajusta el ancho del contenedor de entrada */
