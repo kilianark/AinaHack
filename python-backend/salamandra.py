@@ -33,10 +33,10 @@ def simplifyText(src_lang_code, tgt_lang_code, sentence):
     
 def resumeText(src_lang_code, tgt_lang_code, sentence):
 
-    #translated_sentence = translate_text(src_lang_code, 'Spanish', sentence)
+    translated_sentence = translate_text(src_lang_code, 'Spanish', sentence)
 
-    return resumir_text(sentence)
+    resumed_sentence = resumir_text(translated_sentence)
 
-    #return translate_text('Spanish', tgt_lang_code, resumed_sentence)
+    return translate_text('Spanish', tgt_lang_code, resumed_sentence)
 
     
