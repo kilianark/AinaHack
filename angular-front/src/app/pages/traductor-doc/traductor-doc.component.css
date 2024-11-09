@@ -1,3 +1,8 @@
+body {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 form {
   display: flex;
   justify-content: space-between;
@@ -69,10 +74,8 @@ div[style*="border: 1px solid"] {
   justify-content: center;
   text-align: center;
 }
-#sourceLanguage {
+#medio {
   margin-right: 10px;
-}
-#objLanguage {
   margin-left: 10px;
 }
 .translation-panel {
@@ -91,7 +94,6 @@ div[style*="border: 1px solid"] {
 }
 
 .input-container textarea {
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   width: 100%;
   height: 100px;
@@ -102,7 +104,6 @@ div[style*="border: 1px solid"] {
 }
 
 .output-container {
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   border: 1px solid #ccc;
   padding: 10px;

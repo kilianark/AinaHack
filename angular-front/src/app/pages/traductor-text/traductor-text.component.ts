@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
 import { language } from '../../enums/language.enum';
 import { functions } from '../../enums/functions.enum';
@@ -7,7 +13,7 @@ import { functions } from '../../enums/functions.enum';
 @Component({
   selector: 'app-traductor-text',
   templateUrl: './traductor-text.component.html',
-  styleUrl: './traductor-text.component.css'
+  styleUrl: './traductor-text.component.css',
 })
 export class TraductorTextComponent {
   traductorForm: FormGroup;
@@ -18,7 +24,10 @@ export class TraductorTextComponent {
   tgtLangCode = 'Catalan';
   fun = 'Traduir';
 
-  constructor(private fb: FormBuilder, private translateService: TranslateService) {
+  constructor(
+    private fb: FormBuilder,
+    private translateService: TranslateService
+  ) {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
@@ -73,7 +82,6 @@ export class TraductorTextComponent {
       this.tgtLangCode = 'English';
     }
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
-
   }
 
   onFunChange() {
