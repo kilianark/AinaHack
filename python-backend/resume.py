@@ -7,7 +7,7 @@ modelo = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50"
 tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50")
 
 
-def resumir_text(text, idioma):
+def resumir_text(text):
     # Configurar el idioma de entrada en el tokenizer
     tokenizer.src_lang = "es_XX"
     # Codificar el texto de entrada
