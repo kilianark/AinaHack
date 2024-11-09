@@ -75,7 +75,7 @@ export class TraductorTextComponent {
           });
       } else if (this.fun === 'Resumir') {
         this.translateService
-          .resumeText(
+          .resumeTextSalamandre(
             this.srcLangCode,
             this.tgtLangCode,
             this.traductorForm.get('text')?.value
