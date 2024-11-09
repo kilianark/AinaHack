@@ -16,7 +16,7 @@
         </select>
         <!-- Botón de traducir -->
       </div>
-      <div class="function-selector">
+      <div class="function-selector" style="margin-right:20px">
         <select
           formControlName="functionality"
           id="functionSelect"
@@ -33,6 +33,7 @@
           id="modelSelect"
           (change)="onModChange()"
           *ngIf="funSimplify"
+          style="margin-right:20px"
         >
           <option> Salamandra </option>
           <option> T5 </option>
@@ -44,6 +45,7 @@
           id="modelSelect"
           (change)="onModChange()"
           *ngIf="funResume"
+          style="margin-right:20px"
         >
           <option> Salamandra </option>
           <option> Brat </option>
