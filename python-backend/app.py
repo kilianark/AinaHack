@@ -30,8 +30,7 @@ def simplify():
     #llamar al simplify de salamandra
     simplified_text = simplify(src_lang_code, tgt_lang_code, sentence)
     
-    return jsonify(simplified_text)
-    
+    return jsonify(simplified_text)   
     
 if __name__ == "__main__":
     app.run(debug=True)

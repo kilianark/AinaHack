@@ -3,6 +3,7 @@ import requests
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
 from simplify import simplify
+from resume import resumir_text
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 def translate_text(src_lang_code, tgt_lang_code, sentence):
@@ -30,4 +31,12 @@ def simplifyText(src_lang_code, tgt_lang_code, sentence):
     
     return translate_text('English', tgt_lang_code, simplified_text)
     
+def resumeText(src_lang_code, tgt_lang_code, sentence):
+
+    translated_sentence = translate_text(src_lang_code, 'Spanish', sentence)
+
+    resumed_sentence = resumir_text(translated_sentence)
+
+    return translate_text('Spanish', tgt_lang_code, resumed_sentence)
+
     
