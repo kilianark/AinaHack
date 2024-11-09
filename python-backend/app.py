@@ -6,6 +6,7 @@ from salamandra import simplifyText
 from salamandra import simplifyTextSalamandra
 from salamandra import resumeText
 from salamandra import resumeTextSalamandra
+from chaty import send_message_to_chatbot
 
 app = Flask(__name__)
 CORS(app)
@@ -97,6 +98,19 @@ def extract_text_from_pdf():
     
     # Devolver el texto extraído en formato JSON
     return jsonify({"text": text})
+
+@app.route("/chatbot", methods=["POST"])
+def chatbot_endpoint():
+    
+    data = request.get_json()
+    user_msg = data.get("message")
+    
+    if not user_msg:
+        return jsonify({"error": "No s'ha proporcionat cap missatge."}), 400
+    
+    bot_response = send_message_to_chatbot(user_msg)
+    
+    return jsonify({"response": bot_response})
     
 if __name__ == "__main__":
     app.run(debug=True)
