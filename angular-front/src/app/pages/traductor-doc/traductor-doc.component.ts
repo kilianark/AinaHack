@@ -3,17 +3,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateService } from '../../services/translate/translate.service';
+import { provideHttpClient } from '@angular/common/http';
 import { extractTextFromPDF } from '../../pdf-reader.util';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-traductor-doc',
-  standalone: true,
-  imports: [CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule ],
   templateUrl: './traductor-doc.component.html',
   styleUrl: './traductor-doc.component.css'
 })
@@ -21,7 +16,7 @@ export class TraductorDocComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private translateService: TranslateService){ 
     this.traductorForm = this.fb.group({
       sourceLanguage: ['es'], // Idioma de origen
       targetLanguage: ['cat'], // Idioma de destino
@@ -31,17 +26,8 @@ export class TraductorDocComponent {
 
   guardar() {
     if (this.traductorForm.valid) {
-      const textToTranslate = this.traductorForm.get('text')?.value;
-      // Lógica de traducción. Para este ejemplo, mostramos el mismo texto.
-      this.translatedText = textToTranslate;
-    }
-  }
-
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file && file.type === 'application/pdf') {
-      extractTextFromPDF(file).then(text => {
-        console.log(text); // Aquí puedes mostrar el texto extraído
+      this.translateService.translateText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
+        this.translatedText = response.translatedText
       });
     }
   }
