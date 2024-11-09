@@ -8,27 +8,49 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 def translate_text(src_lang_code, tgt_lang_code, sentence):
     # Load tokenizer and model
-
-
-    load_dotenv(".env")
-    HF_TOKEN = "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"
-    BASE_URL = " https://o9vasr2oal4oyt2j.us-east-1.aws.endpoints.huggingface.cloud"
-    
-    headers = {
-    "Accept" : "application/json",
-    "Authorization": f"Bearer {HF_TOKEN}",
-    "Content-Type": "application/json"
-}
-    prompt = f'[{src_lang_code}] {sentence} \n[{tgt_lang_code}]'
-    payload = {
-        "inputs": prompt,
-        "parameters": {
-            "max_new_tokens": 4000  # Add max_tokens to the parameters
+    sentencesBig=[]
+    sentencesBig = sentence.split(', ')
+    print(sentencesBig)
+    generated_text = []
+    for sentences in sentencesBig:
+        
+        load_dotenv(".env")
+        HF_TOKEN = "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"
+        BASE_URL = "https://o9vasr2oal4oyt2j.us-east-1.aws.endpoints.huggingface.cloud"
+        headers = {
+            "Accept" : "application/json",
+            "Authorization": f"Bearer {HF_TOKEN}",
+            "Content-Type": "application/json"
         }
-    }
-    
-    response = requests.post(BASE_URL + "/generate", headers=headers, json=payload,)
-    return (response.json()["generated_text"])
+        prompt = f'[{src_lang_code}] {sentences} \n[{tgt_lang_code}]'
+        payload = { "inputs": prompt, "parameters": {
+            "max_new_tokens": 3000,
+            "temperature": 0.7,  # Adjust the temperature to control randomness
+            "repetition_penalty": 1.2,  # Higher value will discourage repetition
+            "frequency_penalty": 1.2,
+                                                     }}
+        response = requests.post(BASE_URL + "/generate", headers=headers, json=payload)
+
+        # Check if the response status code is 200 (OK)
+        if response.status_code == 200:
+            # Parse the response JSON and extract the generated text
+            response_data = response.json()  # The response will be in JSON format
+            translated_sentence = response_data.get("generated_text", "").strip()
+            if translated_sentence and translated_sentence[-1] not in ['.', '?', '!']:
+                translated_sentence += ','
+            generated_text.append(translated_sentence)
+        else:
+            # Handle the error if the request was unsuccessful
+            generated_text.append(f"Error: {response.status_code} - {response.text}")
+    result = ' '.join(generated_text)
+    #', '.join(generated_text)
+
+    # Ensure the final output ends with a period
+    if result and result[-1] not in ['.', '?', '!']:
+        result += '.'
+    return  result, ""
+
+
 
 def simplifyText(src_lang_code, tgt_lang_code, sentence):
     
