@@ -2,7 +2,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { GlobalWorkerOptions } from 'pdfjs-dist';
 
 // Configurar el worker con pdfjs
-GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@2.18.0/es5/build/pdf.worker.min.js`;
+GlobalWorkerOptions.workerSrc = '../../public/assets/pdf.worker.js';
 
 // Función para extraer texto de un archivo PDF
 export async function extractTextFromPDF(file: File): Promise<string> {
