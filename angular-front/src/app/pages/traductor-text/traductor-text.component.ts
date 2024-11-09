@@ -10,6 +10,7 @@ import { TranslateService } from '../../services/translate/translate.service';
 import { language } from '../../enums/language.enum';
 import { functions } from '../../enums/functions.enum';
 import { PdfGenService } from '../../services/pdfGen/pdf-gen.service';
+import {ChatyService} from '../../services/chaty/chaty.service';
 
 @Component({
   selector: 'app-traductor-text',
@@ -32,7 +33,8 @@ export class TraductorTextComponent {
   constructor(
     private fb: FormBuilder,
     private translateService: TranslateService,
-    private pdfGenService: PdfGenService
+    private pdfGenService: PdfGenService,
+    private chatyService: ChatyService
   ) {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
@@ -235,6 +237,6 @@ export class TraductorTextComponent {
     this.modalVisible = false;
   }
   submitText() {
-    
+    this.chatyService
   }
 }
