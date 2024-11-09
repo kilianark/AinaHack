@@ -22,6 +22,18 @@
         </select>
         <!-- Botón de traducir -->
       </div>
+      <div class="function-selector">
+        <label for="functionSelect">Sel·lecciona una funció</label>
+        <select
+          formControlName="functionality"
+          id="functionSelect"
+          (change)="onFunChange()"
+        >
+          <option *ngFor="let function of functionsArr" [value]="function">
+            {{ function }}
+          </option>
+        </select>
+      </div>
       <div class="button-container">
         <button
           mat-raised-button
