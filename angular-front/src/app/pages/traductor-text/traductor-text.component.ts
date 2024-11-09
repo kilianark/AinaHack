@@ -19,7 +19,7 @@ export class TraductorTextComponent {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
-      text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
+      text: ['', [Validators.required, Validators.maxLength(5000)]] // Campo de texto
     });
   }
 
@@ -27,7 +27,7 @@ export class TraductorTextComponent {
     if (this.traductorForm.valid) {
       console.log("srcLang", this.srcLangCode);
       console.log("tgtLang", this.tgtLangCode);
-      this.translateService.simplifyText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
+      this.translateService.translateText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
         this.translatedText = response
         console.log(response)
       });
