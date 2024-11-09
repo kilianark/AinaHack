@@ -22,8 +22,10 @@ export class TraductorDocComponent {
 
   guardar() {
     if (this.traductorForm.valid) {
+      console.log("pre-translateService")
       this.translateService.translateText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
-        this.translatedText = response.translatedText
+        this.translatedText = response
+        console.log(response)
       });
     }
   }
