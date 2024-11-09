@@ -1,11 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { extractTextFromPDF } from '../../pdf-reader.util';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '../../services/translate/translate.service';
+import { language } from '../../enums/language.enum';
 
 @Component({
   selector: 'app-traductor-text',
@@ -15,23 +11,52 @@ import { TranslateService } from '../../services/translate/translate.service';
 export class TraductorTextComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
+  languages = Object.values(language);
+  srcLangCode = 'Spanish';
+  tgtLangCode = 'Catalan';
 
   constructor(private fb: FormBuilder, private translateService: TranslateService) {
     this.traductorForm = this.fb.group({
-      sourceLanguage: ['es'], // Idioma de origen
-      targetLanguage: ['cat'], // Idioma de destino
+      sourceLanguage: [language.Spanish], // Idioma de origen
+      targetLanguage: [language.Catalan], // Idioma de destino
       text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
     });
   }
 
   guardar() {
     if (this.traductorForm.valid) {
-      console.log("pre-translateService")
-      this.translateService.simplifyText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
+      console.log("srcLang", this.srcLangCode);
+      console.log("tgtLang", this.tgtLangCode);
+      this.translateService.simplifyText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
         this.translatedText = response
         console.log(response)
       });
     }
+  }
+
+  onSrcLanguageChange() {
+    const tmp = this.traductorForm.get('sourceLanguage')?.value;
+    if (tmp === 'Castellà') {
+      this.srcLangCode = 'Spanish';
+    } else if (tmp === 'Català') {
+      this.srcLangCode = 'Catalan';
+    } else if (tmp === 'Anglès') {
+      this.srcLangCode = 'English';
+    }
+    console.log('nuevo valor seleccionado src: ', this.srcLangCode);
+  }
+
+  onTgtLanguageChange() {
+    const tmp = this.traductorForm.get('targetLanguage')?.value;
+    if (tmp === 'Castellà') {
+      this.tgtLangCode = 'Spanish';
+    } else if (tmp === 'Català') {
+      this.tgtLangCode = 'Catalan';
+    } else if (tmp === 'Anglès') {
+      this.tgtLangCode = 'English';
+    }
+    console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
+
   }
 
 }
