@@ -1,4 +1,5 @@
 import fitz
+import json
 from flask import Flask, request, jsonify  # Importar módulos necesarios
 from flask_cors import CORS
 from salamandra import translate_text
@@ -109,8 +110,7 @@ def chatbot_endpoint():
         return jsonify({"error": "No s'ha proporcionat cap missatge."}), 400
     
     bot_response = send_message_to_chatbot(user_msg)
-    
-    return jsonify({"response": bot_response})
+    return {"response": bot_response}
     
 if __name__ == "__main__":
     app.run(debug=True)

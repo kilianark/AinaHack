@@ -39,12 +39,12 @@ def send_message_to_chatbot(user_message):
 
     if response.status_code == 200:
         respuesta_json = response.json()
-        
-        return respuesta_json["content"]["text"]
+        return respuesta_json["generated_text"]
     else:
         
         return f"Error: {response.status_code} - {response.text}"
-    
+ 
+'''   
 def start_chatbot():
     print("¡Bienvenido al chatbot de Salamandra! Escribe 'salir' para terminar la conversación.")
 
@@ -58,5 +58,5 @@ def start_chatbot():
         bot_response = send_message_to_chatbot(user_message)
 
         print(f"Chatbot: {bot_response}")
-
-start_chatbot()
+'''
+#start_chatbot()

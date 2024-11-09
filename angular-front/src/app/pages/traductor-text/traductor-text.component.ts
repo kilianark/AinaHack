@@ -226,8 +226,8 @@ export class TraductorTextComponent {
   generatePDF() {
     this.pdfGenService.generatePDF(this.translatedText);
   }
-  inputText: string = ''; 
   modalVisible: boolean = false;
+
   openWindow() {
     this.modalVisible = true;
   }
@@ -236,7 +236,15 @@ export class TraductorTextComponent {
   closeWindow() {
     this.modalVisible = false;
   }
+
+  inputText: string = ''; 
+  outputText: string = '';
   submitText() {
-    this.chatyService
+    this.chatyService.sendMessage(this.inputText).subscribe((response) => {
+      const tmp = response;
+      console.log(tmp)
+      this.outputText = tmp["response"];
+      console.log(tmp["response"]);
+    });;
   }
 }
