@@ -39,10 +39,22 @@
           formControlName="model"
           id="modelSelect"
           (change)="onModChange()"
+          *ngIf="funSimplify"
         >
-          <option *ngFor="let function of functionsArr" [value]="model">
-            {{ model }}
-          </option>
+          <option> Salamandra </option>
+          <option> T5 </option>
+          
+        </select>
+
+        <select
+          formControlName="model"
+          id="modelSelect"
+          (change)="onModChange()"
+          *ngIf="funResume"
+        >
+          <option> Salamandra </option>
+          <option> Brat </option>
+          
         </select>
       </div>
       <div class="button-container">
