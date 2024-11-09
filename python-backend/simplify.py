@@ -13,11 +13,11 @@ def simplify(text):
     model.to(device)
 
     # Encode the input text
-    inputs = tokenizer.encode("simplify: " + text, return_tensors="pt", max_length=512, truncation=True)
+    inputs = tokenizer.encode("simplify: " + text, return_tensors="pt", max_length=1000000, truncation=True)
     inputs = inputs.to(device)
 
     # Generate the simplified text
-    outputs = model.generate(inputs, max_length=150, num_beams=4, early_stopping=True)
+    outputs = model.generate(inputs, max_length=1000000, num_beams=4, early_stopping=True)
     simplified_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     return simplified_text

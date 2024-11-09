@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
 import { language } from '../../enums/language.enum';
 
 @Component({
   selector: 'app-traductor-text',
   templateUrl: './traductor-text.component.html',
-  styleUrl: './traductor-text.component.css'
+  styleUrl: './traductor-text.component.css',
 })
 export class TraductorTextComponent {
   traductorForm: FormGroup;
@@ -15,22 +21,31 @@ export class TraductorTextComponent {
   srcLangCode = 'Spanish';
   tgtLangCode = 'Catalan';
 
-  constructor(private fb: FormBuilder, private translateService: TranslateService) {
+  constructor(
+    private fb: FormBuilder,
+    private translateService: TranslateService
+  ) {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
-      text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
+      text: ['', [Validators.required, Validators.maxLength(5000)]], // Campo de texto
     });
   }
 
   guardar() {
     if (this.traductorForm.valid) {
-      console.log("srcLang", this.srcLangCode);
-      console.log("tgtLang", this.tgtLangCode);
-      this.translateService.simplifyText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
-        this.translatedText = response
-        console.log(response)
-      });
+      console.log('srcLang', this.srcLangCode);
+      console.log('tgtLang', this.tgtLangCode);
+      this.translateService
+        .simplifyText(
+          this.srcLangCode,
+          this.tgtLangCode,
+          this.traductorForm.get('text')?.value
+        )
+        .subscribe((response) => {
+          this.translatedText = response;
+          console.log(response);
+        });
     }
   }
 
@@ -56,7 +71,5 @@ export class TraductorTextComponent {
       this.tgtLangCode = 'English';
     }
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
-
   }
-
 }

@@ -1,34 +1,56 @@
 <form [formGroup]="traductorForm" (ngSubmit)="guardar()">
-    <div class="translator-container">
-        <!-- Selector de idioma -->
-        <div class="buttons-container">
-        <div class="language-selector">
-            <select formControlName="sourceLanguage" (change)="onSrcLanguageChange()">
-                <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
-            </select>
-            <span class="swap-icon">⇄</span>
-            <select formControlName="targetLanguage" (change)="onTgtLanguageChange()">
-                <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
-            </select>
-             <!-- Botón de traducir -->
-       
-        </div>
-        <div class="button-container">
-            <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Tradueix</button>
-        </div>
-        </div>
-        <!-- Campos de entrada y salida -->
-        <div class="translation-panel">
-            <div class="input-container">
-                <textarea formControlName="text" maxlength="500" placeholder="Introduïu aquí el text que voleu traduir..."></textarea>
-                <small>{{ 500 - traductorForm.get('text')?.value.length || 500 }} caràcters restants</small>
-            </div>
-
-            <div class="output-container">
-                <p>{{ translatedText || 'Traducció' }}</p>
-            </div>
-        </div>
-
-       
+  <div class="translator-container">
+    <!-- Selector de idioma -->
+    <div class="buttons-container">
+      <div class="language-selector">
+        <select
+          formControlName="sourceLanguage"
+          (change)="onSrcLanguageChange()"
+        >
+          <option *ngFor="let language of languages" [value]="language">
+            {{ language }}
+          </option>
+        </select>
+        <span class="swap-icon" id="medio">⇄</span>
+        <select
+          formControlName="targetLanguage"
+          (change)="onTgtLanguageChange()"
+        >
+          <option *ngFor="let language of languages" [value]="language">
+            {{ language }}
+          </option>
+        </select>
+        <!-- Botón de traducir -->
+      </div>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="traductorForm.invalid"
+        >
+          Tradueix
+        </button>
+      </div>
     </div>
+    <!-- Campos de entrada y salida -->
+    <div class="translation-panel">
+      <div class="input-container">
+        <textarea
+          formControlName="text"
+          maxlength="5000"
+          placeholder="Introduïu aquí el text que voleu traduir..."
+        ></textarea>
+        <small
+          >{{
+            5000 - traductorForm.get("text")?.value.length || 5000
+          }}
+          caràcters restants</small
+        >
+      </div>
+
+      <div class="output-container">
+        <p>{{ translatedText }}</p>
+      </div>
+    </div>
+  </div>
 </form>

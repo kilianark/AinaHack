@@ -1,45 +1,47 @@
+body {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 header {
-    display: flex;
-    color: white;
-    background-color: #b22222; /* Brown color similar to your example */
-    padding: 8px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    
+  display: flex;
+  color: white;
+  background-color: #b22222; /* Brown color similar to your example */
+  padding: 8px;
+  font-family: "Merriweather", serif;
+  font-size: 15px;
 }
 
 .title-container {
-    display: flex;
-    align-items: center;
-    margin-right: 40px;
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
 }
 h1 {
-    margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    margin-left: 10px;
-    
+  margin: 0px;
+  font-size: 1.5em;
+  margin-left: 10px;
 }
 nav {
-    display: flex;
-    justify-content: center; /* Center align the tabs */
-    align-items: center;
+  display: flex;
+  justify-content: center; /* Center align the tabs */
+  align-items: center;
 }
 
 .header_tab {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 .header_tab:hover {
-    text-decoration: underline; /* Optional: underline effect on hover */
+  text-decoration: underline; /* Optional: underline effect on hover */
 }
 
 .divider {
-    color: white;
-    padding: 0 10px;
+  color: white;
+  padding: 0 10px;
 }
