@@ -8,9 +8,11 @@ from resumeSal import resumeSalamandra
 from simplifySal import simplifySalamandra
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
+load_dotenv()
+api_token = os.getenv("API_TOKEN")
 def translate_text(src_lang_code, tgt_lang_code, sentence):
     # Load tokenizer and model
+    
     sentencesBig=[]
     sentencesBig = sentence.split(', ')
     print(sentencesBig)
@@ -18,7 +20,7 @@ def translate_text(src_lang_code, tgt_lang_code, sentence):
     for sentences in sentencesBig:
         
         load_dotenv(".env")
-        HF_TOKEN = "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"
+        HF_TOKEN = api_token
         BASE_URL = "https://o9vasr2oal4oyt2j.us-east-1.aws.endpoints.huggingface.cloud"
         headers = {
             "Accept" : "application/json",
