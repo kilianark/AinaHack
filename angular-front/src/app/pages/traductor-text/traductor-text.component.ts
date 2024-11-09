@@ -32,30 +32,49 @@ export class TraductorTextComponent {
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
       functionality: [functions.Translate],
-      text: ['', [Validators.required, Validators.maxLength(5000)]] // Campo de texto
+      text: ['', [Validators.required, Validators.maxLength(5000)]], // Campo de texto
     });
   }
 
   guardar() {
     if (this.traductorForm.valid) {
-      console.log("srcLang", this.srcLangCode);
-      console.log("tgtLang", this.tgtLangCode);
+      this.translatedText = "Traduciendo...";
+      console.log('srcLang', this.srcLangCode);
+      console.log('tgtLang', this.tgtLangCode);
       console.log(this.fun);
       if (this.fun === 'Traduir') {
-        this.translateService.translateText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
-          this.translatedText = response
-          console.log(response)
-        });
+        this.translateService
+          .translateText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
       } else if (this.fun === 'Simplificar') {
-        this.translateService.simplifyText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
-          this.translatedText = response
-          console.log(response)
-        });
+        this.translateService
+          .simplifyText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
       } else if (this.fun === 'Resumir') {
-        this.translateService.resumeText(this.srcLangCode, this.tgtLangCode, this.traductorForm.get('text')?.value).subscribe(response => {
-          this.translatedText = response
-          console.log(response)
-        });
+        this.translateService
+          .resumeText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
       }
     }
   }
@@ -90,4 +109,18 @@ export class TraductorTextComponent {
     console.log(tmp);
   }
 
+  swapLanguages() {
+    const sourceValue = this.traductorForm.get('sourceLanguage')?.value;
+    const targetValue = this.traductorForm.get('targetLanguage')?.value;
+
+    // Swap the values
+    this.traductorForm.patchValue({
+      sourceLanguage: targetValue,
+      targetLanguage: sourceValue,
+    });
+    this.tgtLangCode = this.traductorForm.get('targetLanguage')?.value;
+    this.srcLangCode = this.traductorForm.get('sourceLanguage')?.value;
+
+    console.log('nuevo valor seleccionado src: ', this.srcLangCode);
+  }
 }
