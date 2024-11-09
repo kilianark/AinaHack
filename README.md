@@ -116,7 +116,33 @@ Aquest fitxer conté una funció per transformar textos de llenguatge complex a 
 
 2. **Funcions del fitxer**:
    - **`simplify`**: Pren un text en llenguatge jurídic o formal i l’envia al model T5 per simplificar-lo. Aquesta funció és usada dins `salamandra.py` per transformar textos en idiomes difícils d'entendre a una forma més senzilla.
-   - 
+  
+### **`simplifySalamandra.py`**: Mòdul per simplificació de text usant Salamandra-7b
+Aquest fitxer defineix la funció de simplificació de text amb el model Salamandra-7b per transformar textos tècnics en versions col·loquials, fent-los més accessibles sense resumir la informació original.
+
+1. **Instal·lacions usades**:
+   - **`requests`**: Per enviar peticions HTTP a l'API de Hugging Face que utilitza el model Salamandra-7b.
+   - **`transformers`**: Importa el `AutoTokenizer` per pre-processar i adaptar els textos al format necessari per a la simplificació.
+   - **`os`**: Estableix una variable d’entorn per optimitzar el rendiment de transformers en funcions específiques.
+3. **Funcions del fitxer**:
+   - **`simplifySalamandra`**: Simplifica un text tècnic transformant-lo en llenguatge col·loquial.
+     - **Prompt del sistema**: Inicia amb una instrucció per detectar  terminologia tècnica i adaptar-la a una terminologia col·loquial sense resumir el contingut.
+     - **Procediment**: Crea un prompt amb el text de l'usuari i envia una petició a l'API de Hugging Face, retornant el text simplificat.
+    
+
+### **`resumeSalamandra.py`**: Mòdul per resum de text usant Salamandra-7b
+
+Aquest fitxer conté una funció per extreure els punts clau d'un text llarg i generar una descripció clara i estructurada d’aquests punts.
+
+1. **Instal·lacions usades**:
+   - **`requests`**: Per enviar peticions HTTP a l'API de Hugging Face que utilitza el model Salamandra-7b.
+   - **`transformers`**: Importa el `AutoTokenizer` per pre-processar i adaptar els textos al format necessari per a la simplificació.
+   - **`os`**: Estableix una variable d’entorn per optimitzar el rendiment de transformers en funcions específiques.
+3. **Funcions del fitxer**:
+   - **`resumeSalamandra`**: Resum del text en punts clau.
+     - **Prompt del sistema**: Instruccions per detectar els punts més rellevants del text i descriure'ls de manera estructurada i ordenada.
+     - **Procediment**: El text de l'usuari es combina amb un prompt per a la generació de resums i es processa a través de l'API de Hugging Face amb paràmetres de baixa variabilitat `(temperature: 0.1)` per mantenir la precisió en els resums.
+   
 
 # Models Usats al Backend
 
