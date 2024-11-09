@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { extractTextFromPDF } from '../../pdf-reader.util';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateService } from '../../services/translate/translate.service';
 
 @Component({
   selector: 'app-traductor-text',
@@ -15,7 +16,7 @@ export class TraductorTextComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private translateService: TranslateService) {
     this.traductorForm = this.fb.group({
       sourceLanguage: ['es'], // Idioma de origen
       targetLanguage: ['cat'], // Idioma de destino
@@ -25,9 +26,11 @@ export class TraductorTextComponent {
 
   guardar() {
     if (this.traductorForm.valid) {
-      const textToTranslate = this.traductorForm.get('text')?.value;
-      // Lógica de traducción. Para este ejemplo, mostramos el mismo texto.
-      this.translatedText = textToTranslate;
+      console.log("pre-translateService")
+      this.translateService.simplifyText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
+        this.translatedText = response
+        console.log(response)
+      });
     }
   }
 

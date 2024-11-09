@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TraductorTextComponent } from '../../pages/traductor-text/traductor-text.component';
 import { TraductorDocComponent } from '../../pages/traductor-doc/traductor-doc.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,8 +20,7 @@ import { ResumirComponent } from '../../pages/resumir/resumir.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
   providers: [provideHttpClient(), TranslateService]
 })

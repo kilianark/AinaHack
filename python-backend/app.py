@@ -18,6 +18,20 @@ def translate():
     translated_text = translate_text(src_lang_code, tgt_lang_code, sentence)
     
     return jsonify(translated_text)
+
+@app.route("/simplify", methods=["POST"])
+def simplify():
+    #obtener datos de la solicitud JSON
+    data = request.json
+    src_lang_code = data.get("src_lang_code")
+    tgt_lang_code = data.get("tgt_lang_code")
+    sentence = data.get("sentence")
+    
+    #llamar al simplify de salamandra
+    simplified_text = simplify(src_lang_code, tgt_lang_code, sentence)
+    
+    return jsonify(simplified_text)
+    
     
 if __name__ == "__main__":
     app.run(debug=True)

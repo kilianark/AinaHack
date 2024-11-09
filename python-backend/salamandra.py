@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import requests
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
+from simplify import simplify
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 def translate_text(src_lang_code, tgt_lang_code, sentence):
@@ -20,4 +21,13 @@ def translate_text(src_lang_code, tgt_lang_code, sentence):
     payload = { "inputs": prompt, "parameters": {}}
     response = requests.post(BASE_URL + "/generate", headers=headers, json=payload)
     return (response.json()["generated_text"])
+
+def simplifyText(src_lang_code, tgt_lang_code, sentence):
+    
+    translated_sentence = translate_text(src_lang_code, 'English', sentence)
+    
+    simplified_text = simplify(translated_sentence)
+    
+    return translate_text('English', tgt_lang_code, simplified_text)
+    
     
