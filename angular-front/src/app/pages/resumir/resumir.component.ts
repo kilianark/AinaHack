@@ -15,7 +15,7 @@ export class ResumirComponent {
     this.traductorForm = this.fb.group({
       sourceLanguage: ['es'], // Idioma de origen
       targetLanguage: ['cat'], // Idioma de destino
-      text: ['', [Validators.required, Validators.maxLength(500)]] // Campo de texto
+      text: ['', [Validators.required, Validators.maxLength(5000)]] // Campo de texto
     });
   }
 

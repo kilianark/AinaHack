@@ -24,8 +24,8 @@
         <!-- Campos de entrada y salida -->
         <div class="translation-panel">
             <div class="input-container">
-                <textarea formControlName="text" maxlength="500" placeholder="Introduïu aquí el text que voleu resumir..."></textarea>
-                <small>{{ 500 - traductorForm.get('text')?.value.length || 500 }} caràcters restants</small>
+                <textarea formControlName="text" maxlength="5000" placeholder="Introduïu aquí el text que voleu resumir..."></textarea>
+                <small>{{ 5000 - traductorForm.get('text')?.value.length || 5000 }} caràcters restants</small>
             </div>
 
             <div class="output-container">
