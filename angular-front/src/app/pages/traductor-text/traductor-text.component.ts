@@ -23,8 +23,10 @@ export class TraductorTextComponent {
   functionsArr = Object.values(functions);
   srcLangCode = 'Spanish';
   tgtLangCode = 'Catalan';
-  fun = 'Traduir';
-
+  fun = 'Traduir'; 
+  model = "Salamandra";
+  funSimplify=false;
+  funResume=false;
   haveContentForPDF = false;
 
   constructor(
@@ -113,7 +115,9 @@ export class TraductorTextComponent {
 
     console.log('nuevo valor seleccionado src: ', this.srcLangCode);
   }
-
+  onModChange(){
+    const tmp = this.traductorForm.get('sourceLanguage')?.value;
+  }
   onTgtLanguageChange() {
     const tmp = this.traductorForm.get('targetLanguage')?.value;
     if (tmp === 'Castellà') {
@@ -139,7 +143,14 @@ export class TraductorTextComponent {
   }
 
   onFunChange() {
+    this.funSimplify = false;
+    this.funResume = false;
     const tmp = this.traductorForm.get('functionality')?.value;
+    if (tmp === 'Simplificar') {
+      this.funSimplify = true;
+    } else if (tmp === 'Resumir') {
+      this.funResume = true;
+    }
     this.fun = tmp;
     console.log(tmp);
   }
