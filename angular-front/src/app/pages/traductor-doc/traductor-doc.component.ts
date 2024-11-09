@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
 import { extractTextFromPDF } from '../../pdf-reader.util';
+import { PdfService } from '../../services/pdf/pdf.service';
 
 @Component({
   selector: 'app-traductor-doc',
@@ -11,8 +12,9 @@ import { extractTextFromPDF } from '../../pdf-reader.util';
 export class TraductorDocComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
+  selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder, private translateService: TranslateService){ 
+  constructor(private fb: FormBuilder, private translateService: TranslateService, private pdfService: PdfService){ 
     this.traductorForm = this.fb.group({
       sourceLanguage: ['es'], // Idioma de origen
       targetLanguage: ['cat'], // Idioma de destino
@@ -21,20 +23,18 @@ export class TraductorDocComponent {
   }
 
   guardar() {
-    if (this.traductorForm.valid) {
-      console.log("pre-translateService")
-      this.translateService.translateText('Spanish', 'Catalan', this.traductorForm.get('text')?.value).subscribe(response => {
-        this.translatedText = response
-        console.log(response)
-      });
+    if (!this.selectedFile) {
+      console.error("No file selected!");  // Muestra un error si no hay archivo
+      return;
+    }
+    this.pdfService.uploadPdf(this.selectedFile).subscribe(response => {
+      console.log('Text extret: ', response.text);
+    });
+  }
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedFile = input.files[0];  // Guarda el archivo en selectedFile
     }
   }
-  /*onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file && file.type === 'application/pdf') {
-      extractTextFromPDF(file).then(text => {
-        console.log(text); // Aquí puedes mostrar el texto extraído
-      });
-    }
-  }*/
 }

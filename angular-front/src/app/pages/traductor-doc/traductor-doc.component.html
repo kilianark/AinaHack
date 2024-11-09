@@ -21,7 +21,6 @@
         <button
           mat-raised-button
           type="submit"
-          [disabled]="traductorForm.invalid"
         >
           Tradueix
         </button>
@@ -29,7 +28,7 @@
     </div>
     <div class="pdf">
       <label for="pdfInput">Selecciona un archivo PDF:</label>
-      <input type="file" id="pdfInput" accept="application/pdf" />
+      <input type="file" id="pdfInput" accept="application/pdf" (change)="onFileSelected($event)"/>
     </div>
     <!-- Campos de entrada y salida -->
     <div class="translation-panel">
