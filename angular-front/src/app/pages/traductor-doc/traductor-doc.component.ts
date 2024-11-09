@@ -30,6 +30,7 @@ export class TraductorDocComponent {
       console.error("No file selected!");  // Muestra un error si no hay archivo
       return;
     }
+    this.translatedText = "Traduciendo...";
     this.pdfService.uploadPdf(this.selectedFile).subscribe(response => {
       this.setencePdf =response.text;
       console.log('Text extret: ', response.text);

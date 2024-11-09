@@ -13,6 +13,7 @@
         </select>
         <span class="swap-icon" id="medio" (click)="swapLanguages()">⇄</span>
         <select
+        id="language"
           formControlName="targetLanguage"
           (change)="onTgtLanguageChange()"
         >
@@ -23,7 +24,6 @@
         <!-- Botón de traducir -->
       </div>
       <div class="function-selector">
-        <label for="functionSelect">Sel·lecciona una funció</label>
         <select
           formControlName="functionality"
           id="functionSelect"

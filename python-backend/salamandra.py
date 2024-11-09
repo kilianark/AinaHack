@@ -48,7 +48,7 @@ def translate_text(src_lang_code, tgt_lang_code, sentence):
     # Ensure the final output ends with a period
     if result and result[-1] not in ['.', '?', '!']:
         result += '.'
-    return  result, ""
+    return  result
 
 
 

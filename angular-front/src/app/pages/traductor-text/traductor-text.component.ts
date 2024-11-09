@@ -137,9 +137,9 @@ export class TraductorTextComponent {
     const tmpSrc = this.traductorForm.get('sourceLanguage')?.value;
     if (tmpSrc === 'Castellà') {
       this.srcLangCode = 'Spanish';
-    } else if (tmpTgt === 'Català') {
+    } else if (tmpSrc === 'Català') {
       this.srcLangCode = 'Catalan';
-    } else if (tmpTgt === 'Anglès') {
+    } else if (tmpSrc === 'Anglès') {
       this.tgtLangCode = 'English';
     }
 

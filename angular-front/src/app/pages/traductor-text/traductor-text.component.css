@@ -21,7 +21,9 @@ form {
   flex-direction: column;
   justify-content: space-between;
 }
-
+#language{
+  margin-right:20px;
+}
 mat-form-field {
   width: 100%;
 }

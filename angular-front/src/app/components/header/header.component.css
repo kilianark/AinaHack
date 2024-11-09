@@ -1,6 +1,6 @@
 body {
   font-family: "Merriweather", serif;
-  font-weight: 400;
+  font-weight: bold;
   font-style: normal;
 }
 header {
@@ -44,4 +44,9 @@ nav {
 .divider {
   color: white;
   padding: 0 10px;
+}
+button{
+  font-family: "Merriweather", serif;
+  font-weight: bold;
+  font-style: normal;
 }

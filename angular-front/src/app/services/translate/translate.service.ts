@@ -17,7 +17,7 @@ export class TranslateService {
     const body = {
       src_lang_code: srcLangCode,
       tgt_lang_code: tgtLangCode,
-      sentence: sentence
+      sentence: sentence.replace(/\n/g, " "),
     };
     return this.http.post<any>(this.translateApiUrl, body);
   }

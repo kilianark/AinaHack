@@ -27,13 +27,13 @@
       </div>
     </div>
     <div class="pdf">
-      <label for="pdfInput">Selecciona un archivo PDF:</label>
+      <label for="pdfInput">Selecciona un archivo PDF: </label>
       <input type="file" id="pdfInput" accept="application/pdf" (change)="onFileSelected($event)"/>
     </div>
     <!-- Campos de entrada y salida -->
     <div class="translation-panel">
       <div class="output-container">
-        <p>{{ translatedText || "Traducción" }}</p>
+        <p>{{ translatedText }}</p>
       </div>
     </div>
   </div>
