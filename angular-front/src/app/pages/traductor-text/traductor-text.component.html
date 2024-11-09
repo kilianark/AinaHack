@@ -34,6 +34,17 @@
           </option>
         </select>
       </div>
+      <div class="function-selector">
+        <select
+          formControlName="model"
+          id="modelSelect"
+          (change)="onModChange()"
+        >
+          <option *ngFor="let function of functionsArr" [value]="model">
+            {{ model }}
+          </option>
+        </select>
+      </div>
       <div class="button-container">
         <button
           mat-raised-button
