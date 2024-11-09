@@ -1,7 +1,10 @@
 <header>
-    {{ title }}
-
-    <button class="header_buttons" routerLink="/translate_text">Traduir text</button>
-
-    <button class="header_buttons" routerLink="/translate_pdf">Traduir Pdf</button>
+    <div class="title-container">
+    <h1>Bug Busters</h1>
+    </div>
+    <nav>
+        <button class="header_tab" routerLink="/translate_text">Traductor</button>
+        <span class="divider">|</span>
+        <button class="header_tab" routerLink="/translate_pdf">Traductor PDF</button>
+    </nav>
 </header>
