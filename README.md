@@ -116,6 +116,68 @@ Aquest fitxer conté una funció per transformar textos de llenguatge complex a 
 
 2. **Funcions del fitxer**:
    - **`simplify`**: Pren un text en llenguatge jurídic o formal i l’envia al model T5 per simplificar-lo. Aquesta funció és usada dins `salamandra.py` per transformar textos en idiomes difícils d'entendre a una forma més senzilla.
+   - 
+
+# Models Usats al Backend
+
+En aquest projecte, hem utilitzat diversos models d'intel·ligència artificial per a la traducció de textos, simplificació de llenguatge, resum de textos i processament de documents PDF. A continuació, es descriuen els models que s'han utilitzat i el seu propòsit.
+
+## 1. **Salamandra (Model de Traducció Automàtica i Simplificació)**
+
+- **Lloc d'ús**: Traducció de textos
+- **Descripció**: El model Salamandra és una eina desenvolupada per facilitar la traducció de textos, així com la seva simplificació i resum. Aquest model es basa en l'ús de diversos models de transformadors, incloent MarianMT per a la traducció i altres components per a la simplificació i el resum de textos.
+- **Funció al projecte**: El model Salamandra es fa servir per traduir textos entre diferents idiomes, simplificar textos complexos i generar resums. Les funcionalitats inclouen traduir textos entre diversos idiomes, simplificar-los a un llenguatge més clar i concís, i resumir textos llargs per fer-los més fàcils d’entendre.
+- **On s'utilitza**: 
+  - A **`salamandra.py`** dins la funció `translate_text`, que gestiona la traducció de textos entre diversos idiomes (incloent català, castellà i anglès).
+  - També es fa servir en la funció `simplifyText` per traduir el text a l'anglès, simplificar-lo i traduir-lo novament a l'idioma original.
+  - A la funció `resumeText`, que primer tradueix el text a l'espanyol, el resumeix i després el torna a traduir a l'idioma de destí.
+
+## 2. **T5 (Text-to-Text Transfer Transformer)**
+
+- **Lloc d'ús**: Simplificació de textos
+- **Descripció**: T5 és un model desenvolupat per Google que converteix diversos tipus de tasques en un problema de generació de text. Es pot utilitzar per a una varietat de tasques de processament de llenguatge natural, incloent-hi la simplificació de textos.
+- **Funció al projecte**: El model T5 es fa servir per simplificar textos complexos, com ara textos jurídics o tècnics, en un llenguatge més accessible i fàcil d’entendre.
+- **On s'utilitza**: 
+  - A **`simplify.py`**, dins de la funció `simplify`, que utilitza T5 per simplificar el llenguatge jurídic o formal a un llenguatge més senzill.
+
+```python
+  from transformers import T5ForConditionalGeneration, T5Tokenizer
+
+  # Carreguem el model T5 per a simplificació
+  model = T5ForConditionalGeneration.from_pretrained('t5-base')
+  tokenizer = T5Tokenizer.from_pretrained('t5-base')
+  
+  def simplify_text(text):
+      inputs = tokenizer.encode("simplify: " + text, return_tensors="pt")
+      outputs = model.generate(inputs)
+      simplified_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+      return simplified_text
+
+```
+
+## 3. **BART (Bidirectional and Auto-Regressive Transformers)**
+
+- **Lloc d'ús**: Resum de textos
+- **Descripció**: BART és un model de transformador que es fa servir per a tasques de resum de textos. Combina els millors aspectes dels models bidireccionals i autoregressius per generar resums de qualitat.
+- **Funció al projecte**: El model BART s’utilitza per generar resums de textos llargs, simplificant-los a una versió més curta i concisa sense perdre la informació clau.
+- **On s'utilitza**: 
+  - A **`resume.py`**, dins de la funció `resumir_text`, que pren un text llarg i el divideix en fragments per generar un resum de manera eficient.
+
+```python
+  from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
+
+  # Carreguem el model MBart per resumir textos
+  model = MBartForConditionalGeneration.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
+  tokenizer = MBart50TokenizerFast.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
+  
+  def summarize_text(text):
+      inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
+      summary_ids = model.generate(inputs['input_ids'], num_beams=4, min_length=30, max_length=100)
+      summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+      return summary
+
+```
+
 
 # Frontend (Angular)
 
