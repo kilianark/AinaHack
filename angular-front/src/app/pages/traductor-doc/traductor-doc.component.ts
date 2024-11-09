@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
-import { extractTextFromPDF } from '../../pdf-reader.util';
 import { PdfService } from '../../services/pdf/pdf.service';
 
 @Component({
