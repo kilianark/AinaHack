@@ -4,6 +4,7 @@ from flask_cors import CORS
 from salamandra import translate_text
 from salamandra import simplifyText
 from salamandra import resumeText
+from salamandra import resumeTextSalamandra
 
 app = Flask(__name__)
 CORS(app)
@@ -46,7 +47,20 @@ def resumerTextApi():
     #llamar al simplify de salamandra
     resumed_text = resumeText(src_lang_code, tgt_lang_code, sentence)
     
-    return jsonify(resumed_text)  
+    return jsonify(resumed_text)
+  
+@app.route("/resume-sal", methods=["POST"])
+def resumerSal():
+    data = request.json
+    src_lang_code = data.get("src_lang_code")
+    tgt_lang_code = data.get("tgt_lang_code")
+    sentence = data.get("sentence")
+    
+    resumed_text = resumeTextSalamandra(src_lang_code, tgt_lang_code, sentence)
+    
+    return jsonify(resumed_text)
+
+    
 
 @app.route("/extract-text-from-pdf", methods=["POST"])
 def extract_text_from_pdf():

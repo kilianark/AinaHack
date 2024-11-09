@@ -6,7 +6,7 @@ model_name = "BSC-LT/salamandra-7b-instruct-aina-hack"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-def resumeSalamander(text):
+def resumeSalamandra(text):
     headers = {
         "Accept" : "application/json",
         "Authorization": f"Bearer {HF_TOKEN}",

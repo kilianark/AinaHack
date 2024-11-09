@@ -10,6 +10,8 @@ export class TranslateService {
   private translateApiUrl = 'http://127.0.0.1:5000/translate';
   private simplifyApiUrl = 'http://127.0.0.1:5000/simplify';
   private resumeApiUrl = 'http://127.0.0.1:5000/resume';
+  private resumeSalamandraApiUrl = 'http://127.0.0.1:5000/resume-sal';
+
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +40,15 @@ export class TranslateService {
       sentence: sentence
     };
     return this.http.post<any>(this.resumeApiUrl, body);
+  }
+
+  resumeTextSalamandre(srcLangCode: string, tgtLangCode: string, sentence: string): Observable<any> {
+    const body = {
+      src_lang_code: srcLangCode,
+      tgt_lang_code: tgtLangCode,
+      sentence: sentence
+    };
+    return this.http.post<any>(this.resumeSalamandraApiUrl, body);
   }
 
 }
