@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
 import { language } from '../../enums/language.enum';
+import { functions } from '../../enums/functions.enum';
 
 @Component({
   selector: 'app-traductor-text',
@@ -18,8 +19,10 @@ export class TraductorTextComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
   languages = Object.values(language);
+  functionsArr = Object.values(functions);
   srcLangCode = 'Spanish';
   tgtLangCode = 'Catalan';
+  fun = 'Traduir';
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +31,7 @@ export class TraductorTextComponent {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
       targetLanguage: [language.Catalan], // Idioma de destino
+      functionality: [functions.Translate],
       text: ['', [Validators.required, Validators.maxLength(5000)]], // Campo de texto
     });
   }
@@ -37,21 +41,41 @@ export class TraductorTextComponent {
       this.translatedText = "Traduciendo...";
       console.log('srcLang', this.srcLangCode);
       console.log('tgtLang', this.tgtLangCode);
-      this.translateService
-        .simplifyText(
-          this.srcLangCode,
-          this.tgtLangCode,
-          this.traductorForm.get('text')?.value
-        )
-        .subscribe((response) => {
-          this.translatedText = response;
-          console.log(response);
-        },
-        (error) => {
-          // En caso de error, puedes actualizar con un mensaje de error
-          this.translatedText = "Hubo un error en la traducción.";
-          console.error("Error en la traducción", error);
-        });
+      console.log(this.fun);
+      if (this.fun === 'Traduir') {
+        this.translateService
+          .translateText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+      } else if (this.fun === 'Simplificar') {
+        this.translateService
+          .simplifyText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+      } else if (this.fun === 'Resumir') {
+        this.translateService
+          .resumeText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.traductorForm.get('text')?.value
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+      }
     }
   }
 
@@ -77,5 +101,26 @@ export class TraductorTextComponent {
       this.tgtLangCode = 'English';
     }
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
+  }
+
+  onFunChange() {
+    const tmp = this.traductorForm.get('functionality')?.value;
+    this.fun = tmp;
+    console.log(tmp);
+  }
+
+  swapLanguages() {
+    const sourceValue = this.traductorForm.get('sourceLanguage')?.value;
+    const targetValue = this.traductorForm.get('targetLanguage')?.value;
+
+    // Swap the values
+    this.traductorForm.patchValue({
+      sourceLanguage: targetValue,
+      targetLanguage: sourceValue,
+    });
+    this.tgtLangCode = this.traductorForm.get('targetLanguage')?.value;
+    this.srcLangCode = this.traductorForm.get('sourceLanguage')?.value;
+
+    console.log('nuevo valor seleccionado src: ', this.srcLangCode);
   }
 }
