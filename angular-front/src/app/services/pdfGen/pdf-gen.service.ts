@@ -12,7 +12,7 @@ export class PdfGenService {
     const doc = new jsPDF();
 
     doc.setFontSize(28);
-    doc.text('Bug Busters', 20, 25);
+    doc.text('Trad Cat', 20, 25);
 
     //linea divisoria
     doc.setLineWidth(0.5);
