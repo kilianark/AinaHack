@@ -3,16 +3,12 @@
         <!-- Selector de idioma -->
         <div class="buttons-container">
         <div class="language-selector">
-            <select formControlName="sourceLanguage">
-                <option value="es">Espanyol</option>
-                <option value="en">Anglès</option>
-                <option value="cat">Català</option>
+            <select formControlName="sourceLanguage" (change)="onSrcLanguageChange()">
+                <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
             </select>
             <span class="swap-icon">⇄</span>
-            <select formControlName="targetLanguage">
-                <option value="es">Espanyol</option>
-                <option value="en">Anglès</option>
-                <option value="cat">Català</option>
+            <select formControlName="targetLanguage" (change)="onTgtLanguageChange()">
+                <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
             </select>
              <!-- Botón de traducir -->
        
