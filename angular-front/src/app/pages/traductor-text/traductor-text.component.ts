@@ -224,4 +224,17 @@ export class TraductorTextComponent {
   generatePDF() {
     this.pdfGenService.generatePDF(this.translatedText);
   }
+  inputText: string = ''; 
+  modalVisible: boolean = false;
+  openWindow() {
+    this.modalVisible = true;
+  }
+
+  // Close the modal
+  closeWindow() {
+    this.modalVisible = false;
+  }
+  submitText() {
+    
+  }
 }
