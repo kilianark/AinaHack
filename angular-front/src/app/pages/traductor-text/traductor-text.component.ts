@@ -9,6 +9,7 @@ import {
 import { TranslateService } from '../../services/translate/translate.service';
 import { language } from '../../enums/language.enum';
 import { functions } from '../../enums/functions.enum';
+import { PdfGenService } from '../../services/pdfGen/pdf-gen.service';
 
 @Component({
   selector: 'app-traductor-text',
@@ -17,7 +18,7 @@ import { functions } from '../../enums/functions.enum';
 })
 export class TraductorTextComponent {
   traductorForm: FormGroup;
-  translatedText: string | null = null;
+  translatedText!: string;
   languages = Object.values(language);
   functionsArr = Object.values(functions);
   srcLangCode = 'Spanish';
@@ -26,7 +27,8 @@ export class TraductorTextComponent {
 
   constructor(
     private fb: FormBuilder,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private pdfGenService: PdfGenService
   ) {
     this.traductorForm = this.fb.group({
       sourceLanguage: [language.Spanish], // Idioma de origen
@@ -143,5 +145,9 @@ export class TraductorTextComponent {
 
     console.log('nuevo valor seleccionado src: ', this.srcLangCode);
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
+  }
+
+  generatePDF() {
+    this.pdfGenService.generatePDF(this.translatedText);
   }
 }

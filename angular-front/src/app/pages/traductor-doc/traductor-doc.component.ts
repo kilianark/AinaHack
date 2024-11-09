@@ -13,6 +13,9 @@ export class TraductorDocComponent {
   traductorForm: FormGroup;
   translatedText: string | null = null;
   selectedFile: File | null = null;
+  setencePdf: string = "";
+  srcLangCode = 'Spanish';
+  tgtLangCode = 'Catalan';
 
   constructor(private fb: FormBuilder, private translateService: TranslateService, private pdfService: PdfService){ 
     this.traductorForm = this.fb.group({
@@ -28,7 +31,19 @@ export class TraductorDocComponent {
       return;
     }
     this.pdfService.uploadPdf(this.selectedFile).subscribe(response => {
+      this.setencePdf =response.text;
       console.log('Text extret: ', response.text);
+      this.translateService
+          .translateText(
+            this.srcLangCode,
+            this.tgtLangCode,
+            this.setencePdf
+          )
+          .subscribe((response) => {
+            this.translatedText = response;
+            console.log(response);
+          });
+
     });
   }
   onFileSelected(event: Event): void {
