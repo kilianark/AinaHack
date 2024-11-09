@@ -116,6 +116,102 @@ Aquest fitxer conté una funció per transformar textos de llenguatge complex a 
 
 2. **Funcions del fitxer**:
    - **`simplify`**: Pren un text en llenguatge jurídic o formal i l’envia al model T5 per simplificar-lo. Aquesta funció és usada dins `salamandra.py` per transformar textos en idiomes difícils d'entendre a una forma més senzilla.
+   - 
+
+# Models Usats al Backend
+
+En aquest projecte, hem utilitzat diversos models d'intel·ligència artificial per a la traducció de textos, simplificació de llenguatge, resum de textos i processament de documents PDF. A continuació, es descriuen els models que s'han utilitzat i el seu propòsit.
+
+## 1. **MarianMT (Marian Machine Translation)**
+
+- **Lloc d'ús**: Traducció de textos
+- **Descripció**: MarianMT és un model de traducció automàtica desenvolupat per la comunitat de Hugging Face. Aquest model és altament eficient per a traduir textos entre diversos idiomes. 
+- **Funció al projecte**: El model MarianMT es fa servir per a la traducció de textos entre diversos idiomes, incloent-hi català, castellà i anglès. Quan l'usuari introdueix un text a l'aplicació per traduir-lo, aquest model és el que s’encarrega de traduir-lo d'un idioma a un altre.
+- **On s'utilitza**: 
+  - A **`salamandra.py`** dins la funció `translate_text`, que s’encarrega de gestionar la traducció entre idiomes.
+
+```python
+  from transformers import MarianMTModel, MarianTokenizer
+  
+  # Càrrega del model de traducció
+  model_name = 'Helsinki-NLP/opus-mt-es-en'
+  model = MarianMTModel.from_pretrained(model_name)
+  tokenizer = MarianTokenizer.from_pretrained(model_name)
+  
+  def translate_text(text, src_lang, tgt_lang):
+      # Preprocessem el text per traduir-lo
+      translated = model.generate(**inputs)
+      return translated_text
+```
+
+## 2. **T5 (Text-to-Text Transfer Transformer)**
+
+- **Lloc d'ús**: Simplificació de textos
+- **Descripció**: T5 és un model desenvolupat per Google que converteix diversos tipus de tasques en un problema de generació de text. Es pot utilitzar per a una varietat de tasques de processament de llenguatge natural, incloent-hi la simplificació de textos.
+- **Funció al projecte**: El model T5 es fa servir per simplificar textos complexos, com ara textos jurídics o tècnics, en un llenguatge més accessible i fàcil d’entendre.
+- **On s'utilitza**: 
+  - A **`simplify.py`**, dins de la funció `simplify`, que utilitza T5 per simplificar el llenguatge jurídic o formal a un llenguatge més senzill.
+
+```python
+  from transformers import T5ForConditionalGeneration, T5Tokenizer
+
+  # Carreguem el model T5 per a simplificació
+  model = T5ForConditionalGeneration.from_pretrained('t5-base')
+  tokenizer = T5Tokenizer.from_pretrained('t5-base')
+  
+  def simplify_text(text):
+      inputs = tokenizer.encode("simplify: " + text, return_tensors="pt")
+      outputs = model.generate(inputs)
+      simplified_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+      return simplified_text
+
+```
+
+## 3. **BART (Bidirectional and Auto-Regressive Transformers)**
+
+- **Lloc d'ús**: Resum de textos
+- **Descripció**: BART és un model de transformador que es fa servir per a tasques de resum de textos. Combina els millors aspectes dels models bidireccionals i autoregressius per generar resums de qualitat.
+- **Funció al projecte**: El model BART s’utilitza per generar resums de textos llargs, simplificant-los a una versió més curta i concisa sense perdre la informació clau.
+- **On s'utilitza**: 
+  - A **`resume.py`**, dins de la funció `resumir_text`, que pren un text llarg i el divideix en fragments per generar un resum de manera eficient.
+
+```python
+  from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
+
+  # Carreguem el model MBart per resumir textos
+  model = MBartForConditionalGeneration.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
+  tokenizer = MBart50TokenizerFast.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
+  
+  def summarize_text(text):
+      inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
+      summary_ids = model.generate(inputs['input_ids'], num_beams=4, min_length=30, max_length=100)
+      summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+      return summary
+
+```
+
+## 4. **BERT (Bidirectional Encoder Representations from Transformers)**
+
+- **Lloc d'ús**: Anàlisi de sentiments i extracció de text
+- **Descripció**: BERT és un model de transformadors bidireccionals que s’utilitza per millorar la comprensió del context de les paraules dins d’un text, permetent tasques d'anàlisi de sentiments i extracció de text.
+- **Funció al projecte**: Encara que no s'utilitza directament en totes les funcionalitats, BERT és molt útil per a tasques relacionades amb l'anàlisi semàntica de textos. Així, pot ser usat per millorar la qualitat dels resums i altres tasques.
+- **On s'utilitza**: 
+  - Pot ser utilitzat en el futur per a tasques com l'anàlisi de sentiments sobre textos o per millorar la comprensió del text original abans de fer-ne el resum o la simplificació.
+
+```python
+  from transformers import BertForSequenceClassification, BertTokenizer
+
+  # Carreguem el model BERT per anàlisi de sentiments
+  model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
+  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+  
+  def analyze_sentiment(text):
+      inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+      outputs = model(**inputs)
+      sentiment = outputs.logits.argmax(dim=-1).item()
+      return sentiment  # 0: Negatiu, 1: Positiu
+
+```
 
 # Frontend (Angular)
 
