@@ -7,11 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '../../services/translate/translate.service';
+import { ResumirComponent } from '../../pages/resumir/resumir.component';
 
 @NgModule({
   declarations: [
     TraductorTextComponent,
-    TraductorDocComponent
+    TraductorDocComponent,
+    ResumirComponent
   ],
   imports: [
     CommonModule,

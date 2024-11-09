@@ -1,0 +1,37 @@
+<form [formGroup]="traductorForm" (ngSubmit)="guardar()">
+    <div class="translator-container">
+        <!-- Selector de idioma -->
+        <div class="buttons-container">
+        <div class="language-selector">
+            <select formControlName="sourceLanguage">
+                <option value="es">Espanyol</option>
+                <option value="en">Anglès</option>
+                <option value="cat">Català</option>
+            </select>
+            <span class="swap-icon">⇄</span>
+            <select formControlName="targetLanguage">
+                <option value="es">Espanyol</option>
+                <option value="en">Anglès</option>
+                <option value="cat">Català</option>
+            </select>
+             <!-- Botón de traducir -->
+       
+        </div>
+        <div class="button-container">
+            <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Resumeix</button>
+        </div>
+        </div>
+        <!-- Campos de entrada y salida -->
+        <div class="translation-panel">
+            <div class="input-container">
+                <textarea formControlName="text" maxlength="500" placeholder="Introduïu aquí el text que voleu resumir..."></textarea>
+                <small>{{ 500 - traductorForm.get('text')?.value.length || 500 }} caràcters restants</small>
+            </div>
+
+            <div class="output-container">
+                <p>{{ translatedText }}</p>
+            </div>
+        </div>
+       
+    </div>
+</form>
