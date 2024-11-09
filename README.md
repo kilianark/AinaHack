@@ -1,3 +1,8 @@
+# **TradCat**
+
+És una aplicació web que permet traduir, simplificar i resumir textos en diversos idiomes, incloent-hi català, castellà i anglès. La plataforma suporta textos directes i arxius PDF, amb la possibilitat de seleccionar diverses funcions per adaptar-se a les necessitats de l'usuari. Utilitza models d'intel·ligència artificial per oferir resultats precisos i ràpids en les tasques de traducció i processament de textos.
+
+---
 # **Instal·lacions del Projecte**
 
 Aquest projecte requereix diverses biblioteques per suportar funcionalitats de traducció, simplificació de textos, generació de resums i processament de documents PDF. A continuació, es llisten totes les biblioteques i una breu explicació del seu ús.
