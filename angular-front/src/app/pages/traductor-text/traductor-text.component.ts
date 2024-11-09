@@ -72,4 +72,18 @@ export class TraductorTextComponent {
     }
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
   }
+  swapLanguages() {
+    const sourceValue = this.traductorForm.get('sourceLanguage')?.value;
+    const targetValue = this.traductorForm.get('targetLanguage')?.value;
+
+    // Swap the values
+    this.traductorForm.patchValue({
+      sourceLanguage: targetValue,
+      targetLanguage: sourceValue,
+    });
+    this.tgtLangCode = this.traductorForm.get('targetLanguage')?.value;
+    this.srcLangCode = this.traductorForm.get('sourceLanguage')?.value;
+
+    console.log('nuevo valor seleccionado src: ', this.srcLangCode);
+  }
 }

@@ -11,7 +11,7 @@
             {{ language }}
           </option>
         </select>
-        <span class="swap-icon" id="medio">⇄</span>
+        <span class="swap-icon" id="medio" (click)="swapLanguages()">⇄</span>
         <select
           formControlName="targetLanguage"
           (change)="onTgtLanguageChange()"
