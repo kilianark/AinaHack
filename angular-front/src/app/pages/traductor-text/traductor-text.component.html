@@ -103,8 +103,8 @@
       <p>{{ outputText }}</p>
     </div>
     <span class="close" (click)="closeWindow()">&times;</span>
-    <textarea [(ngModel)]="inputText" placeholder="Type something..."></textarea>
-    <button (click)="submitText()">Submit</button>
+    <textarea id="textAreas" [(ngModel)]="inputText" placeholder="Type something..."></textarea>
+    <button id="buttonIA" (click)="submitText()">Submit</button>
   </div>
 
 </div>

@@ -178,6 +178,8 @@ div[style*="border: 1px solid"] {
   border-radius: 10px;
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 /* Style the output text */
 .output {
@@ -188,7 +190,23 @@ div[style*="border: 1px solid"] {
   border-radius: 5px;
   margin-bottom: 20px;
 }
-
+#textAreas{
+  align-self: center;
+  width: 50%;
+  height: 30%;
+}
+#buttonIA{
+  font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    align-self: center;
+    margin-top: 30px;
+}
 /* Close button (X) */
 .close {
   color: #aaa;
