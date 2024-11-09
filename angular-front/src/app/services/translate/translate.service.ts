@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class TranslateService {
 
-  private apiUrl = 'http://127.0.0.1:5000/translate';
+  private translateApiUrl = 'http://127.0.0.1:5000/translate';
+  private simplifyApiUrl = 'http://127.0.0.1:5000/simplify';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +18,16 @@ export class TranslateService {
       tgt_lang_code: tgtLangCode,
       sentence: sentence
     };
-    return this.http.post<any>(this.apiUrl, body);
+    return this.http.post<any>(this.translateApiUrl, body);
+  }
+
+  simplifyText(srcLangCode: string, tgtLangCode: string, sentence: string): Observable<any> {
+    const body = {
+      src_lang_code: srcLangCode,
+      tgt_lang_code: tgtLangCode,
+      sentence: sentence
+    };
+    return this.http.post<any>(this.simplifyApiUrl, body);
   }
 
 }
