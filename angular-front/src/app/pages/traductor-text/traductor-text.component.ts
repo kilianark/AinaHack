@@ -38,10 +38,13 @@ export class TraductorTextComponent {
 
   guardar() {
     if (this.traductorForm.valid) {
+      this.translatedText = "Traduciendo...";
       console.log('srcLang', this.srcLangCode);
       console.log('tgtLang', this.tgtLangCode);
       console.log(this.fun);
       if (this.fun === 'Traduir') {
+        console.log('traduint...');
+        console.log('to', this.tgtLangCode);
         this.translateService
           .translateText(
             this.srcLangCode,
@@ -52,6 +55,9 @@ export class TraductorTextComponent {
             this.translatedText = response;
             console.log(response);
           });
+
+          console.log('translated to', this.tgtLangCode);
+
       } else if (this.fun === 'Simplificar') {
         this.translateService
           .simplifyText(
@@ -117,9 +123,25 @@ export class TraductorTextComponent {
       sourceLanguage: targetValue,
       targetLanguage: sourceValue,
     });
-    this.tgtLangCode = this.traductorForm.get('targetLanguage')?.value;
-    this.srcLangCode = this.traductorForm.get('sourceLanguage')?.value;
+    const tmpTgt = this.traductorForm.get('targetLanguage')?.value;
+    if (tmpTgt === 'Castellà') {
+      this.tgtLangCode = 'Spanish';
+    } else if (tmpTgt === 'Català') {
+      this.tgtLangCode = 'Catalan';
+    } else if (tmpTgt === 'Anglès') {
+      this.tgtLangCode = 'English';
+    }
+
+    const tmpSrc = this.traductorForm.get('sourceLanguage')?.value;
+    if (tmpSrc === 'Castellà') {
+      this.srcLangCode = 'Spanish';
+    } else if (tmpTgt === 'Català') {
+      this.srcLangCode = 'Catalan';
+    } else if (tmpTgt === 'Anglès') {
+      this.tgtLangCode = 'English';
+    }
 
     console.log('nuevo valor seleccionado src: ', this.srcLangCode);
+    console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
   }
 }
