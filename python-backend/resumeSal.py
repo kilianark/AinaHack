@@ -28,4 +28,5 @@ def resumeSalamandra(text):
     }
     api_url = BASE_URL + "/generate"
     response = requests.post(api_url, headers=headers, json=payload)
-    return response.json()
+    respuesta= response.json()
+    return respuesta["generated_text"]
