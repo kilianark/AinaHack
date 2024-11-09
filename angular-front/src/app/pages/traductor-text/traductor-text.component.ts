@@ -25,6 +25,8 @@ export class TraductorTextComponent {
   tgtLangCode = 'Catalan';
   fun = 'Traduir';
 
+  haveContentForPDF = false;
+
   constructor(
     private fb: FormBuilder,
     private translateService: TranslateService,
@@ -83,6 +85,7 @@ export class TraductorTextComponent {
             console.log(response);
           });
       }
+      this.haveContentForPDF = true; 
     }
   }
 
@@ -92,9 +95,22 @@ export class TraductorTextComponent {
       this.srcLangCode = 'Spanish';
     } else if (tmp === 'Català') {
       this.srcLangCode = 'Catalan';
+    }  else if (tmp === 'Gallec') {
+      this.srcLangCode = 'Galician';
+    } else if (tmp === 'Euskera') {
+      this.srcLangCode = 'Euskera';
+    } else if (tmp === 'Aragonés') {
+      this.srcLangCode = 'Aragonese';
+    } else if (tmp === 'Portugués') {
+      this.srcLangCode = 'Portuguese';
     } else if (tmp === 'Anglès') {
       this.srcLangCode = 'English';
-    }
+    } else if (tmp === 'Francès') {
+      this.srcLangCode = 'French';
+    } else if (tmp === 'Alemà') {
+      this.srcLangCode = 'German';
+    } 
+
     console.log('nuevo valor seleccionado src: ', this.srcLangCode);
   }
 
@@ -104,9 +120,21 @@ export class TraductorTextComponent {
       this.tgtLangCode = 'Spanish';
     } else if (tmp === 'Català') {
       this.tgtLangCode = 'Catalan';
+    }  else if (tmp === 'Gallec') {
+      this.tgtLangCode = 'Galician';
+    } else if (tmp === 'Euskera') {
+      this.tgtLangCode = 'Euskera';
+    } else if (tmp === 'Aragonés') {
+      this.tgtLangCode = 'Aragonese';
+    } else if (tmp === 'Portugués') {
+      this.tgtLangCode = 'Portuguese';
     } else if (tmp === 'Anglès') {
       this.tgtLangCode = 'English';
-    }
+    } else if (tmp === 'Francès') {
+      this.tgtLangCode = 'French';
+    } else if (tmp === 'Alemà') {
+      this.tgtLangCode = 'German';
+    } 
     console.log('nuevo valor seleccionado tgt: ', this.tgtLangCode);
   }
 

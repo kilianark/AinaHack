@@ -82,6 +82,9 @@ div[style*="border: 1px solid"] {
   margin-right: 10px;
   margin-left: 10px;
 }
+#objLanguage {
+  margin-right: 20px;
+}
 .translation-panel {
   display: flex;
   gap: 20px; /* Espacio entre el input y el output */
