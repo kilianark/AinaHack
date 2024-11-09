@@ -5,6 +5,7 @@ import os
 from simplify import simplify
 from resume import resumir_text
 from resumeSal import resumeSalamandra
+from simplifySal import simplifySalamandra
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
@@ -61,6 +62,14 @@ def simplifyText(src_lang_code, tgt_lang_code, sentence):
     simplified_text = simplify(translated_sentence)
     
     return translate_text('English', tgt_lang_code, simplified_text)
+
+def simplifyTextSalamandra(src_lang_code, tgt_lang_code, sentence):
+    
+    translated_sentence = translate_text(src_lang_code, 'Catalan', sentence)
+    
+    simplified_text = simplifySalamandra(translated_sentence)
+    
+    return translate_text('Catalan', tgt_lang_code, simplified_text)
     
 def resumeText(src_lang_code, tgt_lang_code, sentence):
 

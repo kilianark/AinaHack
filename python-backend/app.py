@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify  # Importar módulos necesarios
 from flask_cors import CORS
 from salamandra import translate_text
 from salamandra import simplifyText
+from salamandra import simplifyTextSalamandra
 from salamandra import resumeText
 from salamandra import resumeTextSalamandra
 
@@ -35,6 +36,17 @@ def simplifyTextApi():
     simplified_text = simplifyText(src_lang_code, tgt_lang_code, sentence)
     
     return jsonify(simplified_text)   
+
+@app.route("/simplify-sal", methods=["POST"])
+def simplifySal():
+    data = request.json
+    src_lang_code = data.get("src_lang_code")
+    tgt_lang_code = data.get("tgt_lang_code")
+    sentence = data.get("sentence")
+    
+    simplified_text = simplifyTextSalamandra(src_lang_code, tgt_lang_code, sentence)
+    
+    return jsonify(simplified_text)
 
 @app.route("/resume", methods=["POST"])
 def resumerTextApi():

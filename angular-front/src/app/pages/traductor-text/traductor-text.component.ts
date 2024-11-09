@@ -64,7 +64,7 @@ export class TraductorTextComponent {
 
       } else if (this.fun === 'Simplificar') {
         this.translateService
-          .simplifyText(
+          .simplifyTextSalamandra(
             this.srcLangCode,
             this.tgtLangCode,
             this.traductorForm.get('text')?.value
@@ -75,7 +75,7 @@ export class TraductorTextComponent {
           });
       } else if (this.fun === 'Resumir') {
         this.translateService
-          .resumeTextSalamandre(
+          .resumeTextSalamandra(
             this.srcLangCode,
             this.tgtLangCode,
             this.traductorForm.get('text')?.value
