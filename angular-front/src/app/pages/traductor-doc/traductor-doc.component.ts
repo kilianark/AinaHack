@@ -31,4 +31,12 @@ export class TraductorDocComponent {
       });
     }
   }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      extractTextFromPDF(file).then(text => {
+        console.log(text); // Aquí puedes mostrar el texto extraído
+      });
+    }
+  }
 }
