@@ -2,40 +2,39 @@
     <div class="translator-container">
         <!-- Selector de idioma -->
         <div class="buttons-container">
-        <div class="language-selector">
-            <select formControlName="sourceLanguage">
-                <option value="es">Español</option>
-                <option value="en">Inglés</option>
-                <option value="cat">Català</option>
-            </select>
-            <span class="swap-icon">⇄</span>
-            <select formControlName="targetLanguage">
-                <option value="es">Español</option>
-                <option value="en">Inglés</option>
-                <option value="cat">Català</option>
-            </select>
+            <div class="language-selector">
+                <select formControlName="sourceLanguage">
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                    <option value="cat">Català</option>
+                </select>
+                <span class="swap-icon">⇄</span>
+                <select formControlName="targetLanguage">
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                    <option value="cat">Català</option>
+                </select>
              <!-- Botón de traducir -->
        
         </div>
+        
         <div class="button-container">
             <button mat-raised-button type="submit" [disabled]="traductorForm.invalid">Tradueix</button>
         </div>
+
         </div>
+        <div class ="pdf">
+            <label for="pdfInput">Selecciona un archivo PDF:</label>
+            <input type="file" id="pdfInput"  accept="application/pdf">
+          </div>
         <!-- Campos de entrada y salida -->
         <div class="translation-panel">
-            <div class="input-container">
-                <textarea formControlName="text" maxlength="500" placeholder="Introduïu aquí el text que voleu traduir..."></textarea>
-                <small>{{ 500 - traductorForm.get('text')?.value.length || 500 }} caracteres restantes</small>
-            </div>
 
             <div class="output-container">
                 <p>{{ translatedText || 'Traducción' }}</p>
             </div>
         </div>
-        <!-- 
-        <div>
-            <label for="pdfInput">Selecciona un archivo PDF:</label>
-            <input type="file" id="pdfInput" (change)="onFileSelected($event)" accept="application/pdf">
-          </div>-->
+        
+        
         </div>
 </form>
